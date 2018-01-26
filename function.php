@@ -3,13 +3,12 @@
 function translate($transl,$dir){
 
   $dictionary = readCsv();
-  $newWord = 'Tokio nera';
+  $newWord = 'tokio nera';
   switch ($dir) {
     case 'lt':
       foreach ($dictionary as $row) {
         if($row['lt']==$transl){
           $newWord = $row['en'];
-
       }
 }
       break;
@@ -23,7 +22,7 @@ function translate($transl,$dir){
   break;
 
     default:
-      $newWord = 'Tokios nera';
+      $newWord = 'tokio nera';
   }
   return $newWord;
 }
@@ -42,11 +41,36 @@ function readCsv()
       'en'=>$a[1]
     ];
     $i++;
-
   }
-  fclose($dictionary);
+  fclose($open);
   //var_dump($dir); die();
   return $dictionary;
 }
+
+// function writeCsv(){
+//
+// }
+
+function addW($addLt,$addEn)
+{
+  $dictionary=[
+  'lt'=>$addLt,
+  'en'=>$addEn
+  ];
+$a = fopen('Dictionary.csv', 'a');
+
+fputcsv($a,[
+  $dictionary['lt'],
+  $dictionary['en']
+]);
+
+
+
+fclose($a);
+ header('Location: index.php');
+
+}
+
+
 
 ?>

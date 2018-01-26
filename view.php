@@ -15,6 +15,9 @@
   <body>
     <div class="container">
       <?php if ($transl == null) :?>
+        <?php if ($message==false) {
+          echo $message;
+        } ?>
         <form class="" action="index.php" method="get">
           <div class="form-group">
             <label name="transl">Word : </label>
@@ -34,8 +37,23 @@
         </div>
 
       <?php else :?>
-          <h2> <?php echo translate($transl,$dir);?></h2>
-          <a href="index.php" class="btn btn-primary">Back</a>
+
+          <?php if ($newWord=='tokio nera'): ?>
+                <h1>i cant find it, pls add new translation in dictionary"</h2>
+                <form class="" action="index.php" method="get">
+                  <div class="form-group">
+                    <label name="addLt">New LT word : </label>
+                    <input name="addLt" type="text" class="form-control" value="<?php if($dir=='en'){echo $transl;} ?>">
+                    <label name="addEn">New EN word : </label>
+                    <input name="addEn" type="text" class="form-control" value="<?php if($dir=='lt'){echo $transl;} ?>">
+                    <button type="submit" name="button" class="btn btn-primary">Add Word</button>
+                  </div>
+                </form>
+              <?php else: ?>
+
+              <h2> <?php echo translate($transl,$dir);?></h2>
+              <a href="index.php" class="btn btn-primary">Back</a>
+            <?php endif ?>
         <?php endif ?>
 
 
